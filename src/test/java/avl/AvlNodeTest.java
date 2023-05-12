@@ -1,6 +1,5 @@
 package avl;
 
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -25,6 +24,28 @@ import static org.junit.jupiter.api.Assertions.*;
  * */
 public class AvlNodeTest {
 
+    @Test
+    public void testSettersAndGetters() {
+        AvlNode<Integer> node = new AvlNode<>(10);
+        AvlNode<Integer> left = new AvlNode<>(5);
+        AvlNode<Integer> right = new AvlNode<>(15);
+        AvlNode<Integer> parent = new AvlNode<>(20);
+        AvlNode<Integer> closestNode = new AvlNode<>(7);
+
+        node.setLeft(left);
+        node.setRight(right);
+        node.setParent(parent);
+        node.setClosestNode(closestNode);
+        node.setHeight(2);
+
+        assertEquals(left, node.getLeft());
+        assertEquals(right, node.getRight());
+        assertEquals(parent, node.getParent());
+        assertEquals(closestNode, node.getClosestNode());
+        assertEquals(2, node.getHeight());
+    }
+
+
     @Nested
     @DisplayName("given an empty avlNode")
     class emptyAvlNode{
@@ -46,92 +67,66 @@ public class AvlNodeTest {
     @Nested
     @DisplayName("given an avl tree with one node")
     class avlTreeWithOneNode{
+        @Test
+        public void testConstructorAndGetters() {
+            Integer item = 10;
 
+            AvlNode<Integer> node = new AvlNode<>(item);
+
+            assertEquals(item, node.getItem());
+            assertEquals(null, node.getLeft());
+            assertEquals(null, node.getRight());
+            assertEquals(null, node.getParent());
+            assertEquals(null, node.getClosestNode());
+            assertEquals(0, node.getHeight());
+        }
     }
 
     @Nested
     @DisplayName("given an only left child avl tree")
     class onlyLeftAvlTree{
+        @Test
+        public void testOnlyLeftChild(){
+            AvlNode<Integer> node = new AvlNode<>(10);
+            AvlNode<Integer> left = new AvlNode<>(5);
 
+            node.setLeft(left);
+
+            assertEquals(left, node.getLeft());
+            assertTrue(node.hasOnlyALeftChild());
+            assertFalse(node.hasOnlyARightChild());
+            assertFalse(node.hasParent());
+        }
     }
 
     @Nested
-    @DisplayName("given an only righ child avl tree")
+    @DisplayName("given an only right child avl tree")
     class onlyRightAvlTree{
 
     }
 
     @Nested
-    @DisplayName("given an only left child avl tree")
+    @DisplayName("given a node with left and right children")
     class normalCaseAvlTree{
 
+
+        @Test
+        public void testUpdateHeight() {
+            AvlNode<Integer> node = new AvlNode<>(10);
+            AvlNode<Integer> left = new AvlNode<>(5);
+            AvlNode<Integer> right = new AvlNode<>(15);
+
+            assertEquals(0, node.getHeight());
+
+            node.setLeft(left);
+            node.setRight(right);
+
+            node.updateHeight();
+
+            assertEquals(1, node.getHeight());
+        }
     }
 
-    @Test
-    public void testUpdateHeight() {
-        // Arrange
-        AvlNode<Integer> node = new AvlNode<>(10);
-        AvlNode<Integer> left = new AvlNode<>(5);
-        AvlNode<Integer> right = new AvlNode<>(15);
-        left.setHeight(1);
-        right.setHeight(2);
-        node.setLeft(left);
-        node.setRight(right);
-
-        // Act
-        node.updateHeight();
-
-        // Assert
-        assertEquals(3, node.getHeight());
-    }
-
-    @Test
-    public void testConstructorAndGetters() {
-        Integer item = 10;
-
-        AvlNode<Integer> node = new AvlNode<>(item);
-
-        assertEquals(item, node.getItem());
-        assertEquals(null, node.getLeft());
-        assertEquals(null, node.getRight());
-        assertEquals(null, node.getParent());
-        assertEquals(null, node.getClosestNode());
-        assertEquals(0, node.getHeight());
-    }
-
-    @Test
-    public void testOnlyLeftChild(){
-        AvlNode<Integer> node = new AvlNode<>(10);
-        AvlNode<Integer> left = new AvlNode<>(5);
-
-        node.setLeft(left);
-
-        assertEquals(left, node.getLeft());
-        assertTrue(node.hasOnlyALeftChild());
-        assertFalse(node.hasOnlyARightChild());
-        assertFalse(node.hasParent());
-    }
-
-    @Test
-    public void testSettersAndGetters() {
-        AvlNode<Integer> node = new AvlNode<>(10);
-        AvlNode<Integer> left = new AvlNode<>(5);
-        AvlNode<Integer> right = new AvlNode<>(15);
-        AvlNode<Integer> parent = new AvlNode<>(20);
-        AvlNode<Integer> closestNode = new AvlNode<>(7);
-
-        node.setLeft(left);
-        node.setRight(right);
-        node.setParent(parent);
-        node.setClosestNode(closestNode);
-        node.setHeight(2);
-
-        assertEquals(left, node.getLeft());
-        assertEquals(right, node.getRight());
-        assertEquals(parent, node.getParent());
-        assertEquals(closestNode, node.getClosestNode());
-        assertEquals(2, node.getHeight());
-    }
 
 
 
