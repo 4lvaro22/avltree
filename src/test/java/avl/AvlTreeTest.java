@@ -5,9 +5,6 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Created with IntelliJ IDEA. User: Antonio J. Nebro Date: 08/07/13
- */
 public class AvlTreeTest {
 
     AvlTree<Integer> avlTree;
@@ -307,7 +304,7 @@ public class AvlTreeTest {
 
 
         @Test
-        @DisplayName("Should insert into the top of the tree when you call insert method for the first time")
+        @DisplayName("When you call insert method for the first time must insert into the top of the tree")
         public void testInsercionArbolVacio() {
 
             avlTree.insert(5);
@@ -319,7 +316,7 @@ public class AvlTreeTest {
         }
 
         @Test
-        @DisplayName("Should insert into right of the top node when you add a second node to the tree that is bigger than the top one")
+        @DisplayName("When you add a second node to the tree that is bigger than the top one must insert into right of the top node")
         public void testInsercionMayorArbolConUnNodo() {
 
             avlTree.insert(5);
@@ -337,7 +334,7 @@ public class AvlTreeTest {
         }
 
         @Test
-        @DisplayName("Should insert into left of the top node when you add a second node to the tree that is lower than the top one")
+        @DisplayName("When you add a second node to the tree that is lower than the top one must insert into left of the top node")
         public void testInsercionMenorArbolConUnNodo() {
 
             avlTree.insert(5);
@@ -355,7 +352,7 @@ public class AvlTreeTest {
         }
 
         @Test
-        @DisplayName("Shoud insert in the correct position different values when insert method is called several times with different values")
+        @DisplayName("When insert method is called several times with different values must insert in the correct position different values")
         public void testInsercionArbolConVariosNodos() {
 
             avlTree.insert(5);
@@ -384,7 +381,7 @@ public class AvlTreeTest {
     class OrderTests {
 
         @Test
-        @DisplayName("Should return a string with all the items of the tree starting with the top one when the toString method is called")
+        @DisplayName("When the toString method is called must return a string with all the items of the tree starting with the top one")
         public void inOrderTest () {
 
             avlTree.insert(3);
