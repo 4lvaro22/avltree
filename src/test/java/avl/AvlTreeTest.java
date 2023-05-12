@@ -1,6 +1,6 @@
+package avl;
 
 import java.util.Comparator;
-
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,12 +24,6 @@ public class AvlTreeTest {
         avlTree = null;
         comparator = null;
     }
-
-
-
-
-
-
 
 
 
@@ -97,7 +91,6 @@ public class AvlTreeTest {
 
             assertEquals(expectedValue, obtainedValue);
         }
-
 
     }
 
