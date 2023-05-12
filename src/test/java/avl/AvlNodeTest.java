@@ -7,22 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-/* CASOS DE PRUEBA -
- *   1. testSetterAndGetters() -> Comprobar que cuando creas un posible árbol completo (padre, hijos y nodo cercano) con los setters y obtienes el valor con getters, es correcto
- *   2. Nodo vacío
- *      2.1. testNullNode() -> Comprobar que cuando se crea un nodo (null), el propio nodo,los hijos, el padre y el nodo más cercano son nulos y la altura es 0
- *   3. Un nodo
- *      3.1. testConstructorAndGetters() -> Comprobar que cuando se crea un nodo (10), los hijos, el padre y el nodo más cercano son nulos y la altura es 0
- *   4. Sólo hijo izquierda
- *      4.1. testOnlyLeftChild() -> Comprobar que cuando se crea un nodo (5), el árbol sólo tiene hijos a la izquierda y no a la derecha
- *   5. Sólo hijo derecha
- *      5.1 testOnlyRightChild() -> Comprobar que cuando se crea un nodo (15), el árbol sólo tiene hijos a la derecha y no a la izquierda
- *   6. Caso normal (padre e hijos en ambos lados)
- *      6.1
- * */
 public class AvlNodeTest {
 
   @Test
+  @DisplayName("Create several nodes, set right and left children and check with getters kinship")
   public void testSettersAndGetters() {
     AvlNode<Integer> node = new AvlNode<>(10);
     AvlNode<Integer> left = new AvlNode<>(5);
@@ -43,9 +31,8 @@ public class AvlNodeTest {
     assertEquals(2, node.getHeight());
   }
 
-
   @Nested
-  @DisplayName("given an empty avlNode")
+  @DisplayName("Given an empty AvlNode")
   class emptyAvlNode {
 
     @Test
@@ -63,9 +50,8 @@ public class AvlNodeTest {
   }
 
   @Nested
-  @DisplayName("given an avl tree with one node")
+  @DisplayName("Given an avl tree with only one node")
   class avlTreeWithOneNode {
-
     AvlNode<Integer> node;
 
     @BeforeEach
@@ -84,21 +70,21 @@ public class AvlNodeTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("when the item is updated then the value is correctly updated")
     public void testUpdateItem(){
       node.setItem(11);
       assertEquals(11, node.getItem());
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("when we check if it a leaf, return true")
     public void testNodeWithoutChildrenIsLeaf(){
       assertTrue(node.isLeaf());
     }
   }
 
   @Nested
-  @DisplayName("given an only left child avl tree")
+  @DisplayName("Given a node with only left child")
   class onlyLeftAvlTree {
     @Test
     @DisplayName("when getting a node 5 value, the expected values is 5, has a parent 10, there is no right child")
@@ -116,7 +102,7 @@ public class AvlNodeTest {
   }
 
   @Nested
-  @DisplayName("given an only right child avl tree")
+  @DisplayName("Given a node with only right child")
   class onlyRightAvlTree {
 
     @Test
@@ -135,16 +121,23 @@ public class AvlNodeTest {
   }
 
   @Nested
-  @DisplayName("given a node with left and right children")
+  @DisplayName("Given a node with left and right children")
   class normalCaseAvlTree {
+
+    AvlNode<Integer> node;
+    AvlNode<Integer> left;
+    AvlNode<Integer> right;
+
+    @BeforeEach
+    public void setUp(){
+      node = new AvlNode<>(10);
+      left = new AvlNode<>(5);
+      right = new AvlNode<>(15);
+    }
 
     @Test
     @DisplayName("when getting the parent 10, left child 5 and right child 15, the expected values are 10, 5 and 15")
-    public void testGettingParentLeftAndRightChildre() {
-      AvlNode<Integer> node = new AvlNode<>(10);
-      AvlNode<Integer> left = new AvlNode<>(5);
-      AvlNode<Integer> right = new AvlNode<>(15);
-
+    public void testGettingParentLeftAndRightChildren() {
       node.setLeft(left);
       node.setRight(right);
       node.setHeight(2);
@@ -155,7 +148,7 @@ public class AvlNodeTest {
     }
 
     @Test
-    @DisplayName("---")
+    @DisplayName("when we check before and after adding the children, the height is correctly updated")
     public void testUpdateHeight() {
       AvlNode<Integer> node = new AvlNode<>(10);
       AvlNode<Integer> left = new AvlNode<>(5);
