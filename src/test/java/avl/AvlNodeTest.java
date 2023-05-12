@@ -1,12 +1,13 @@
 package avl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+
+import static org.junit.Assert.*;
 
 /* CASOS DE PRUEBA -
  *   1. Nodo vacío
@@ -22,6 +23,105 @@ import org.junit.Test;
  *   2. testSetterAndGetters() -> Comprobar que cuando creas un posible árbol completo (padre, hijos y nodo cercano) con los setters y obtienes el valor con getters, es correcto
  * */
 public class AvlNodeTest {
+
+    @Nested
+    @DisplayName("given an empty avlNode")
+    class emptyAvlNode{
+
+        @Test
+        @DisplayName("n")
+        void testNullNode(){
+            AvlNode<Integer> node = new AvlNode<>(null);
+
+            assertNull(node.getItem());
+            assertNull(node.getLeft());
+            assertNull(node.getRight());
+            assertNull(node.getParent());
+            assertNull(node.getClosestNode());
+            assertEquals(0, node.getHeight());
+        }
+    }
+
+    @Test
+    @DisplayName("n")
+    public void testNullNode(){
+        AvlNode<Integer> node = new AvlNode<>(null);
+
+        assertNull(node.getItem());
+        assertNull(node.getLeft());
+        assertNull(node.getRight());
+        assertNull(node.getParent());
+        assertNull(node.getClosestNode());
+        assertEquals(0, node.getHeight());
+    }
+
+    @Test
+    public void testUpdateHeight() {
+        // Arrange
+        AvlNode<Integer> node = new AvlNode<>(10);
+        AvlNode<Integer> left = new AvlNode<>(5);
+        AvlNode<Integer> right = new AvlNode<>(15);
+        left.setHeight(1);
+        right.setHeight(2);
+        node.setLeft(left);
+        node.setRight(right);
+
+        // Act
+        node.updateHeight();
+
+        // Assert
+        assertEquals(3, node.getHeight());
+    }
+
+    @Test
+    public void testConstructorAndGetters() {
+        Integer item = 10;
+
+        AvlNode<Integer> node = new AvlNode<>(item);
+
+        assertEquals(item, node.getItem());
+        assertEquals(null, node.getLeft());
+        assertEquals(null, node.getRight());
+        assertEquals(null, node.getParent());
+        assertEquals(null, node.getClosestNode());
+        assertEquals(0, node.getHeight());
+    }
+
+    @Test
+    public void testOnlyLeftChild(){
+        AvlNode<Integer> node = new AvlNode<>(10);
+        AvlNode<Integer> left = new AvlNode<>(5);
+
+        node.setLeft(left);
+
+        assertEquals(left, node.getLeft());
+        assertTrue(node.hasOnlyALeftChild());
+        assertFalse(node.hasOnlyARightChild());
+        assertFalse(node.hasParent());
+    }
+
+    @Test
+    public void testSettersAndGetters() {
+        AvlNode<Integer> node = new AvlNode<>(10);
+        AvlNode<Integer> left = new AvlNode<>(5);
+        AvlNode<Integer> right = new AvlNode<>(15);
+        AvlNode<Integer> parent = new AvlNode<>(20);
+        AvlNode<Integer> closestNode = new AvlNode<>(7);
+
+        node.setLeft(left);
+        node.setRight(right);
+        node.setParent(parent);
+        node.setClosestNode(closestNode);
+        node.setHeight(2);
+
+        assertEquals(left, node.getLeft());
+        assertEquals(right, node.getRight());
+        assertEquals(parent, node.getParent());
+        assertEquals(closestNode, node.getClosestNode());
+        assertEquals(2, node.getHeight());
+    }
+
+
 
 
 
